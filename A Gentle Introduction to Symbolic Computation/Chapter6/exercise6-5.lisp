@@ -1,0 +1,12 @@
+(setf LINE '(ROSES ARE RED))
+
+(reverse line)
+(first (last line))
+(nth 1 line)
+(reverse (reverse line))
+(append line (list (first line)))
+(append (last line) line)
+(list (first line) (last line))
+(cons (last line) line)
+(remove 'are line)
+(append line '(violets are blue))

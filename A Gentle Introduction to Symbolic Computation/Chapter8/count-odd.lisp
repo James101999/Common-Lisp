@@ -1,0 +1,11 @@
+(defun count-odd (ls)
+	(cond ((null ls) 0)
+		  ((oddp (first ls))
+		  	(+ 1 (count-odd (rest ls))))
+		  (t (count-odd (rest ls)))))
+
+(defun count-odd-2 (ls)
+	(cond ((null ls) 0)
+		   (t (if (oddp (first ls))
+		   			(+ 1 (count-odd-2 (rest ls)))
+		   		(count-odd-2 (rest ls))))))

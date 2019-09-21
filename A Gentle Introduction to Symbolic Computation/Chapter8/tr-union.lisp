@@ -1,0 +1,15 @@
+(defun tr-union (x y)
+	(append x (tr-urc x y nil)))
+
+(defun tr-urc (x y result)
+	(cond ((null y) result)
+		  ((member (first y) x)
+		  	(tr-urc x (cdr y) result))
+		   (t (tr-urc x (cdr y) (cons (first y) result)))))
+
+(defun tr-union-2 (x y)
+	(cond ((null x) y)
+		  ((member (first x) y)
+		  	(tr-union-2 (cdr x) y))
+		   (t (tr-union-2 (cdr x) 
+		   	(cons (first x) y)))))

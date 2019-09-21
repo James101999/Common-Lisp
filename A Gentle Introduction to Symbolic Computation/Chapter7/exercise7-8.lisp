@@ -1,0 +1,5 @@
+(defun roughly-equal (X K)
+	(find-if #'(lambda (n)
+				(and (not (< n (- K 10)))
+					 (not (> n (+ K 10)))))
+			 X))

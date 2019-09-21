@@ -1,0 +1,5 @@
+(defmacro simple-rotatef (var1 var2)
+	`(let ((temp1 ,var1)
+		   (temp2 ,var2))
+		(setf ,var1 temp2)
+		(setf ,var2 temp1)))

@@ -1,0 +1,5 @@
+(defun it-union (x y)
+	(let ((result x))
+		(dolist (element y result)
+			(unless (member element x)
+				(setf result (push element result))))))

@@ -1,0 +1,5 @@
+(defun rec-check-all-odd (ls)
+	(cond ((null ls) t)
+		  ((evenp (car ls)) (format t "~&Checking ~S..." (car ls)))
+		   (t (format t "~&Checking ~S..." (car ls))
+		   	(rec-check-all-odd (cdr ls)))))

@@ -1,0 +1,87 @@
+(setf family
+	'((colin nil nil)
+	  (deirdre nil nil)
+	  (arthur nil nil)
+	  (kate nil nil)
+	  (frank nil nil)
+	  (linda nil nil)
+	  (suzanne colin deirdre)
+	  (bruce arthur kate)
+	  (charles arthur kate)
+	  (david arthur kate)
+	  (ellen arthur kate)
+	  (george frank linda)
+	  (hillary frank linda)
+	  (andre nil nil)
+	  (tamara bruce suzanne)
+	  (vincent bruce suzanne)
+	  (wanda nil nil)
+	  (ivan george ellen)
+	  (julie george ellen)
+	  (marie george ellen)
+	  (nigel andre hillary)
+	  (frederick nil tamara)
+	  (zelda vincent wanda)
+	  (joshua ivan wanda)
+	  (quentin nil nil)
+	  (robert quentin julie)
+	  (olivia nigel marie)
+	  (peter nigel marie)
+	  (erica nil nil)
+	  (yvette robert zelda)
+	  (diane peter erica)))
+
+(defun father (person)
+	(second (assoc person family)))
+
+(defun mother (person)
+	(third (assoc person family)))
+
+(defun parents (person)
+	(cond ((null (father person)) (list (mother person)))
+		  ((null (mother person)) (list (father person)))
+		   (t (rest (assoc person family)))))
+
+(defun children (parent)
+	(cdr (mapcar #'first
+		(remove-if-not #'(lambda (x) (member parent x)) family))))
+
+(defun siblings (person)
+	(remove person (mapcar #'first (remove-if-not #'(lambda (x) 
+		(or (equal (mother person) (mother (first x))) 
+			(equal (father person) (father (first x)))))
+	 		family))))
+
+(defun mapunion (fn ls)
+	(remove-duplicates (reduce #'append (mapcar fn ls))))
+
+(defun grandparents (person)
+	(mapunion #'parents (parents person)))
+
+(defun cousins (person)
+		(mapunion #'children (set-difference 
+			(mapunion #'children (grandparents person))
+		(parents person))))
+
+(defun descended-from (p1 p2)
+	(cond ((and (null (father p1)) 
+				(null (mother p1))) nil)
+	      ((member p2 (parents p1)) t)
+		   (t (or (descended-from (father p1) p2)
+		   		  (descended-from (mother p1) p2)))))
+
+(defun ancestors (person)
+	(cond ((and (null (father person)) 
+				(null (mother person))) nil)
+		   (t (append (parents person)
+		    (ancestors (father person))
+		   	(ancestors (mother person))))))
+
+(defun generation-gap (p1 p2)
+	(cond  ((or (equal p2 (father p1)) 
+				(equal p2 (mother p1))) 1)
+		   ((not (descended-from p1 p2)) nil)
+		   (t (+ 1 (or 
+		   		   (generation-gap (father p1) p2)
+		   		   (generation-gap (mother p1) p2))))))
+		 

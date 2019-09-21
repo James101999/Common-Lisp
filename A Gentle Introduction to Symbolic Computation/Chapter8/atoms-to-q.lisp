@@ -1,0 +1,5 @@
+(defun atoms-to-q (x)
+	(cond ((null x) nil)
+		  ((atom x ) 'q)
+		   (t (cons (atoms-to-q (car x))
+		   	        (atoms-to-q (cdr x))))))

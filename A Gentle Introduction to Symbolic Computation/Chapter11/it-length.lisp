@@ -1,0 +1,5 @@
+(defun it-length (ls)
+	(let ((total 0))
+		(dolist (element ls total)
+			(unless (equal element nil)
+				(setf total (+ 1 total))))))

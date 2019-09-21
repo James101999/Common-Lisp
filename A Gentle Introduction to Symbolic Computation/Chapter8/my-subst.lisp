@@ -1,0 +1,5 @@
+(defun my-subst (x y tree)
+	(cond ((null tree) nil)
+		  ((atom tree) (if (equal y tree) x tree))
+		   (t (cons (my-subst x y (car tree))
+		   	        (my-subst x y (cdr tree))))))

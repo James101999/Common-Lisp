@@ -1,0 +1,5 @@
+(defun find-number (x)
+	(cond ((numberp x) x)
+		  ((atom x) nil)
+		   (t (or (find-number (car x))
+		   	      (find-number (cdr x))))))

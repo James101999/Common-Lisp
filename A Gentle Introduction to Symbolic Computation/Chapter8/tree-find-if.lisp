@@ -1,0 +1,10 @@
+(defun tree-find-if (fn x)
+	(cond ((atom x) nil)
+		   (t (if (funcall fn (caar x)) (caar x)
+		   		  (tree-find-if fn (cdr x))))))
+
+(defun tree-find-if-2 (fn x)
+	(cond ((and x (atom x) (funcall fn x)) x) 
+		  ((atom x) nil)
+		   (t (or (tree-find-if-2 fn (car x))
+		   		  (tree-find-if-2 fn (cdr x))))))

@@ -1,0 +1,10 @@
+(defun check-all-odd (list-of-numbers)
+	(dolist (e list-of-numbers t)
+		(format t "~&Checking ~S..." e)
+		(if (not (oddp e)) (return nil))))
+
+(defun check-all-odd-2 (list-of-numbers)
+	(do ((e list-of-numbers (cdr e))) 
+		((null e) t) 
+	  (format t "~&Checking ~S..." (car e))
+	  (if (not (oddp (car e))) (return nil))))

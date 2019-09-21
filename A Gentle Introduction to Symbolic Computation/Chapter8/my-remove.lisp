@@ -1,0 +1,5 @@
+(defun my-remove (sym ls)
+	(cond ((null ls) nil)
+		  ((not (equal sym (first ls)))
+		  	(cons (first ls) (my-remove sym (rest ls))))
+		   (t (my-remove sym (rest ls)))))

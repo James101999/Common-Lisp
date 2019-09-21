@@ -1,0 +1,8 @@
+(defun cookie-monster ()
+	(format t "~&Give me cookie!!!")
+	(format t "~&Cookie? ")
+	(finish-output)
+	(let ((x (read)))
+		(if (equal x 'cookie)
+				(format t "~&Thank you!...Munch munch munch...BURP~%")
+			(format t "~&No want ~S...~%~%" x))))

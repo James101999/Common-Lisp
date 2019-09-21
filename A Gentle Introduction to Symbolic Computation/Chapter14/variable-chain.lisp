@@ -1,0 +1,8 @@
+(defmacro variable-chain (&rest variables)
+	`(progn ,@(do* ((body variables (rest body))
+					(x (first body) (first body))
+					(y (second body) (second body))
+					(result nil))
+				   ((null body) (reverse result))
+				(push `(setf ,x ',y) result))
+	'(chain ,@0variables)))

@@ -1,0 +1,5 @@
+(defun count-anywhere (expr ls)
+	(cond ((equal expr ls) 1)
+		  ((atom ls) 0)
+		   (t (+ (count-anywhere expr (first ls))
+		   		 (count-anywhere expr (rest ls))))))

@@ -1,0 +1,5 @@
+(defun count-atoms (ls)
+	(cond ((null ls) 0)
+		  ((atom ls) 1)
+		   (t (+ (count-atoms (first ls))
+		   		 (count-atoms (rest ls))))))
